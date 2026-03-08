@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMatch - Rekomendasi Film</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header id="app-header" class="hidden"> 
+         <h1 id="app-title"><img src="M.png" class="logo-icon" alt="Logo"> MovieMatch</h1>        
+            <div id="user-info">
+            <span id="display-user-name"></span> | 
+            <span id="display-user-age"></span>
+            <button id="update-age-btn" onclick="promptNewAge()">Update Usia</button>
+        </div>
+    </header>
+
+    <div id="login-modal" class="login-full-page">
+        
+        <div class="logo-img">
+            <img src="M.png" alt="🎬">
+        </div>
+
+        <div class="login-container">
+            <h2 class="app-name-title">MovieMatch</h2>
+            <p class="tagline">Your Mood, Our Match!</p>
+
+            <div class="login-card">
+                <h3>Selamat Datang!</h3>
+                <input type="text" id="name-input" placeholder="Masukkan Nama Anda">
+                <input type="number" id="age-input" placeholder="Masukkan Usia Anda">
+                <button onclick="loginUser()">Mulai Cari Film</button>
+            </div>
+        </div>
+    </div>
+    
+    <main id="main-app-content" class="hidden container">
+        <h1 class="welcome-title">Hai, <span id="welcome-name"></span></h1>
+        <p class="welcome-subtitle">Ayo tentukan preferensi film yang kamu inginkan</p>
+        <div class="method-selection">
+            <button onclick="setMethod('quiz')" class="method-btn" id="quiz-btn">
+                Quiz Rekomendasi
+            </button>
+            
+            <button onclick="setMethod('manual')" class="method-btn" id="manual-btn">
+                Filter Manual
+            </button>
+        </div>
+        
+        <div id="criteria-container">
+            </div>
+        
+        <div id="action-buttons-container" class="hidden action-flex-group">
+            <button id="refresh-btn" class="main-action-btn reset-btn" onclick="resetFilters()">
+                Reset Filter
+            </button>
+            
+            <button id="recommend-btn" class="main-action-btn search-btn" onclick="fetchRecommendations()">
+                Cari Rekomendasi!
+            </button>
+        </div>
+        
+    </main>
+    
+    <div id="results-page" class="hidden container">
+        <h2>Hasil Rekomendasi Untuk <span id="welcome-name-result"></span></h2>
+        <div id="recommendation-list" class="movie-grid"></div>
+        <div id="result-action-bar" class="action-flex-group">
+            <button class="main-action-btn restart-btn" onclick="restartApp()"> Logout </button>
+            <div style=" height: fit-content; display: flex; justify-content: center; align-items: center; gap: 12px">
+                <button style="box-sizing: border-box;" class="back-btn" onclick="showFilterPage()"> ← Kembali ke Filter </button>
+                <div id="load-more-container" class="result-action hidden"  >
+                    <button id="load-more-btn" class="main-action-btn more-btn" style="border: 2px solid rgba(255, 255, 255, 0.3) !important;" onclick="fetchRecommendations(true)">
+                        Muat 10 Film Lainnya
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-spinner" class="hidden loading-overlay">
+        <div class="spinner"></div>
+        <p>Memproses rekomendasi...</p>
+    </div>
+
+    <div id="detail-modal" class="modal-backdrop hidden">
+    <div class="modal-content detail-content">
+        <div id="movie-detail-display">
+            </div>
+        <button class="close-btn modal-footer-btn" onclick="document.getElementById('detail-modal').classList.add('hidden')">
+            Tutup Detail
+        </button>
+    </div>
+</div>
+
+    <script src="app.js"></script>
+</body>
+</html>
